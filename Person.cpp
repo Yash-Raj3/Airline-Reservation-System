@@ -1,5 +1,3 @@
-// Implementation of the Person base class and the Passenger derived class.
-
 #include "Person.h"
 #include <iostream>
 using namespace std;
@@ -35,12 +33,10 @@ Person::Person(const string &name, const string &id, int age)
     this->age = age < 0 ? 0 : age;
 }
 
-// Person: Getters
+
 string Person::getName() const { return name; }
 string Person::getId() const { return id; }
 int Person::getAge() const { return age; }
-
-// --- Passenger Class Implementation ---
 Passenger::Passenger(const string &name, const string &id, int age,
                      const string &email, const string &phone)
     : Person(name, id, age),
@@ -54,7 +50,7 @@ Passenger::Passenger(const string &name, const string &id, int age,
     this->phone = phone.empty() ? "N/A" : phone;
 }
 
-// --- Polymorphic Method Overrides ---
+
 string Passenger::getRole() const { return "Passenger"; }
 
 void Passenger::displayInfo() const
@@ -82,15 +78,9 @@ void Passenger::addLoyaltyPoints(int points)
         return;
     }
     loyaltyPoints += points;
-    updateTier(); // Auto-upgrade tier if threshold met
+    updateTier(); 
 }
 
-// Private: Determine tier based on accumulated points
-//  0     → NONE
-//  500+  → BRONZE
-//  1500+ → SILVER
-//  3000+ → GOLD
-//  6000+ → PLATINUM
 void Passenger::updateTier()
 {
     if (loyaltyPoints >= 6000)

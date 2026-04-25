@@ -1,11 +1,7 @@
-// Implementation of the base Seat class and its specific types:
-// EconomySeat, BusinessSeat, and FirstClassSeat.
-
 #include "Seat.h"
 #include <iostream>
 using namespace std;
 
-// Define the default pricing and baggage allowances for each seat category
 const double EconomySeat::BASE_PRICE = 150.00;
 const int EconomySeat::BAGGAGE_KG = 15;
 

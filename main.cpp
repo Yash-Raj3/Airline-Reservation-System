@@ -1,5 +1,4 @@
-// Main entry point for the Airline Reservation System.
-// Provides an interactive menu for managing passengers, flights, and bookings.
+
 
 #include "Person.h"
 #include "Seat.h"
@@ -46,6 +45,7 @@ void displayPassengerMenu() {
     cout << "  2. Update Passenger Contact\n";
     cout << "  3. Remove Passenger\n";
     cout << "  4. View Specific Passenger Bookings\n";
+    cout << "  5. View Specific Passenger Details\n";
     cout << "  0. Back to Main Menu\n";
     cout << "----------------------------\n";
     cout << " Enter choice: ";
@@ -57,6 +57,9 @@ void displayFlightMenu() {
     cout << "  2. Reschedule Flight\n";
     cout << "  3. Remove Flight\n";
     cout << "  4. Cancel a Booking\n";
+    cout << "  5. View Specific Flight Details\n";
+    cout << "  6. View Flight Seats Status\n";
+    cout << "  7. Cancel Flight\n";
     cout << "  0. Back to Main Menu\n";
     cout << "-------------------------\n";
     cout << " Enter choice: ";
@@ -122,6 +125,17 @@ int main() {
                             airline.displayPassengerBookings(pid);
                             break;
                         }
+                        case 5: {
+                            string pid;
+                            cout << "Enter Passenger ID: "; cin >> pid; toUpperCase(pid);
+                            Passenger* p = airline.findPassenger(pid);
+                            if (p) {
+                                p->displayInfo();
+                            } else {
+                                cout << "ERROR: Passenger not found.\n";
+                            }
+                            break;
+                        }
                         case 0:
                             break; // Back to main menu
                         default:
@@ -172,6 +186,52 @@ int main() {
                             int resId;
                             cout << "Enter Reservation ID to cancel: "; cin >> resId;
                             airline.cancelReservation(resId);
+                            break;
+                        }
+                        case 5: {
+                            string fnum;
+                            cout << "Enter Flight Number: "; cin >> fnum; toUpperCase(fnum);
+                            Flight* f = airline.findFlight(fnum);
+                            if (f) {
+                                f->displayInfo();
+                            } else {
+                                cout << "ERROR: Flight not found.\n";
+                            }
+                            break;
+                        }
+                        case 6: {
+                            string fnum;
+                            cout << "Enter Flight Number: "; cin >> fnum; toUpperCase(fnum);
+                            Flight* f = airline.findFlight(fnum);
+                            if (f) {
+                                int seatChoice;
+                                cout << "  1. View Available Seats\n";
+                                cout << "  2. View All Seats\n";
+                                cout << "  Enter choice: ";
+                                if (!(cin >> seatChoice)) {
+                                    cout << "Invalid input.\n";
+                                    clearInput();
+                                } else if (seatChoice == 1) {
+                                    f->displayAvailableSeats();
+                                } else if (seatChoice == 2) {
+                                    f->displayAllSeats();
+                                } else {
+                                    cout << "Invalid choice.\n";
+                                }
+                            } else {
+                                cout << "ERROR: Flight not found.\n";
+                            }
+                            break;
+                        }
+                        case 7: {
+                            string fnum;
+                            cout << "Enter Flight Number to cancel: "; cin >> fnum; toUpperCase(fnum);
+                            Flight* f = airline.findFlight(fnum);
+                            if (f) {
+                                f->cancelFlight();
+                            } else {
+                                cout << "ERROR: Flight not found.\n";
+                            }
                             break;
                         }
                         case 0:

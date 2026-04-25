@@ -1,29 +1,25 @@
 #ifndef FLIGHT_H
 #define FLIGHT_H
 
-// Core module for the Airline System handling flights, reservations,
-// and the main system controller.
-
 #include "Person.h"
 #include "Seat.h"
 #include <string>
 
 // Reservation Class
-// Represents a booked ticket linking a passenger to a flight seat.
 class Reservation {
 private:
-    static int nextResId;        // Auto-increment reservation ID
-    int reservationId;           // Unique booking ID
-    string passengerID;          // Passenger who booked
-    string flightNumber;         // Flight booked on
-    string seatNumber;           // Seat reserved
-    string seatClassName;        // Economy / Business / First Class
-    double totalPrice;           // Final ticket price
-    bool   isCancelled;          // Cancellation flag
-    string bookingTime;          // Timestamp of booking
+    static int nextResId;        
+    int reservationId;           
+    string passengerID;         
+    string flightNumber;         
+    string seatNumber;           
+    string seatClassName;        
+    double totalPrice;           
+    bool   isCancelled;         
+    string bookingTime;          
 
 public:
-    // Constructor
+
     Reservation(const string& passengerID, const string& flightNumber,
                 const string& seatNumber,  const string& seatClass,
                 double price);
@@ -34,7 +30,7 @@ public:
     // Display the booking ticket
     void displayTicket() const;
 
-    // Reservation attribute getters
+    
     int    getReservationId()  const;
     string getPassengerID()    const;
     string getFlightNumber()   const;
@@ -44,42 +40,37 @@ public:
 };
 
 // Flight Class
-// Represents a scheduled flight and manages its associated seats.
+
 class Flight {
 private:
-    string flightNumber;     // e.g., "PK-301"
-    string origin;           // Departure city
-    string destination;      // Arrival city
-    string departureTime;    // Scheduled departure
-    string arrivalTime;      // Scheduled arrival
-    string aircraftType;     // e.g., "Boeing 737"
-    bool   isCancelled;      // Flight status
-    int    loyaltyPointsEarned; // Points given to passengers
-
-    // Polymorphic seat storage — holds all seat types
+    string flightNumber;     
+    string origin;           
+    string destination;      
+    string departureTime;   
+    string arrivalTime;      
+    string aircraftType;    
+    bool   isCancelled;      
+    int    loyaltyPointsEarned; 
     static const int MAX_SEATS = 300;
     Seat* seats[MAX_SEATS];
     int numSeats;
 
 public:
-    // Constructor
+
     Flight(const string& flightNumber, const string& origin,
            const string& destination,  const string& departure,
            const string& arrival,      const string& aircraft);
-
-    // Destructor — frees all dynamically allocated seats
     ~Flight();
 
     // Methods for adding, finding, and managing seats
-    void generateDefaultSeats();                     // Generate 100 prefixed seats
-    void addSeat(Seat* seat);                        // Add any seat type
-    Seat* findSeat(const string& seatNumber);        // Lookup seat
-    Seat* findAvailableSeat(SeatClass sc);           // Find free seat
-    void displayAvailableSeats() const;              // List open seats
-    void displayAllSeats() const;                    // List all seats
-    void cancelFlight();                             // Cancel flight
+    void generateDefaultSeats();                     
+    void addSeat(Seat* seat);                        
+    Seat* findSeat(const string& seatNumber);       
+    Seat* findAvailableSeat(SeatClass sc);           
+    void displayAvailableSeats() const;              
+    void displayAllSeats() const;                    
+    void cancelFlight();                             
 
-    // Flight attribute getters and setters
     string getFlightNumber()  const;
     string getOrigin()        const;
     string getDestination()   const;
@@ -91,30 +82,29 @@ public:
     void   setDepartureTime(const string& time);
     void   setArrivalTime(const string& time);
 
-    // Display flight summary
+    
     void displayInfo() const;
 };
 
 // AirlineSystem Class
-// Main controller managing all passengers, flights, and system data.
 class AirlineSystem {
 private:
-    string airlineName;                   // e.g., "SkyLine Air"
+    string airlineName;                   
     static const int MAX_FLIGHTS = 100;
     static const int MAX_PASSENGERS = 500;
     static const int MAX_RESERVATIONS = 1000;
     
-    Flight* flights[MAX_FLIGHTS];         // All flights
+    Flight* flights[MAX_FLIGHTS];         
     int numFlights;
     
-    Passenger* passengers[MAX_PASSENGERS]; // Registered passengers
+    Passenger* passengers[MAX_PASSENGERS]; 
     int numPassengers;
     
-    Reservation* reservations[MAX_RESERVATIONS]; // All bookings
+    Reservation* reservations[MAX_RESERVATIONS]; 
     int numReservations;
 
 public:
-    // Constructor / Destructor
+    
     AirlineSystem(const string& airlineName);
     ~AirlineSystem();
 
@@ -155,4 +145,4 @@ public:
     void printWelcome() const;
 };
 
-#endif // FLIGHT_H
+#endif

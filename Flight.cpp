@@ -1,6 +1,3 @@
-// Implementation file for core system classes:
-// Reservation, Flight, and AirlineSystem.
-
 #include "Flight.h"
 #include <iostream>
 #include <fstream>
@@ -12,7 +9,6 @@ using namespace std;
 static string getNow() {
     time_t now = time(0);
     string dt = ctime(&now);
-    // Remove the trailing newline character added by ctime
     if (!dt.empty() && dt[dt.length() - 1] == '\n') {
         dt.erase(dt.length() - 1);
     }
@@ -131,7 +127,7 @@ void Flight::generateDefaultSeats()
     }
 }
 
-// Find a seat by its seat number (e.g., "12A")
+// Find a seat by its seat number
 Seat *Flight::findSeat(const string &seatNumber)
 {
     for (int i = 0; i < numSeats; i++)
